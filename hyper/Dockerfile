@@ -4,7 +4,7 @@ MAINTAINER Pengfei Ni <feiskyer@gmail.com>
 RUN yum install -y git wget qemu-kvm curl autoconf automake gcc make cpio pkg-config \
                    device-mapper-devel device-mapper libvirt-devel epel-release &&\
     yum install -y libvirt libvirt-daemon qemu-system-x86 seabios-bin && \
-    mkdir -p /gopath/src/github.com/hyperhq &&\
+    mkdir -p /gopath/src/github.com/hyperhq /var/run/hyper /var/lib/hyper /etc/hyper &&\
     mkdir -p /goroot/ &&\
     mkdir -p /tmp/
 
