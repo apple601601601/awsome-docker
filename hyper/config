@@ -2,10 +2,6 @@
 Kernel=/var/lib/hyper/kernel
 # Boot initrd for KVM/XEN
 Initrd=/var/lib/hyper/hyper-initrd.img
-# BIOS image, qboot bios will accelarate the bootup
-# Bios=/var/lib/hyper/bios-qboot.bin
-# CBFS coreboot fs for boot image, if this is proviced, kernel and initrd will be ignored
-# Cbfs=/var/lib/hyper/cbfs-qboot.rom
 # storage driver for hyper, valid value includes devicemapper, overlay, and aufs
 StorageDriver=overlay
 # Bridge device for hyper, default is hyper0
