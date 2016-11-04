@@ -1,5 +1,5 @@
 #! /bin/bash
 set -e
 
-sh /cgroupfs-mount
+sh /hack/cgroupfs-mount
 nohup dockerd &
