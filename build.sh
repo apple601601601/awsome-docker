@@ -1,6 +1,8 @@
 #!/bin/bash
+set -x
+set -e
 
-for img in python hyper kibana shadowsocks kubernetes-dev
+for img in kubernetes-dev python kibana shadowsocks hyper
 do
   echo "########    Building Image $img    #########"
   docker build -t "$DOCKER_USERNAME/$img" $img

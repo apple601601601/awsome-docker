@@ -2,7 +2,8 @@ From centos:7
 MAINTAINER Pengfei Ni <feiskyer@gmail.com>
 
 RUN yum install -y git wget qemu-kvm curl autoconf automake gcc make cpio pkg-config \
-                   device-mapper-devel device-mapper libvirt-devel &&\
+                   device-mapper-devel device-mapper libvirt-devel epel-release &&\
+    yum install -y libvirt libvirt-daemon qemu-system-x86 seabios-bin && \
     mkdir -p /gopath/src/github.com/hyperhq &&\
     mkdir -p /goroot/ &&\
     mkdir -p /tmp/
@@ -13,22 +14,13 @@ RUN cd /gopath/src/github.com/hyperhq &&\
     git clone https://github.com/hyperhq/hyperstart.git hyperstart &&\
     git clone https://github.com/hyperhq/runv.git runv &&\
     git clone https://github.com/hyperhq/hyperd.git hyperd &&\
-    wget --no-check-certificate -nv https://storage.googleapis.com/golang/go1.6.2.linux-amd64.tar.gz -O /tmp/go.tgz
+    wget --no-check-certificate -nv https://storage.googleapis.com/golang/go1.7.3.linux-amd64.tar.gz -O /tmp/go.tgz
 
 RUN tar xzf /tmp/go.tgz -C /goroot/ &&\
     rm /tmp/go.tgz
 ENV GOPATH /gopath/
 ENV GOROOT /goroot/go/
 ENV PATH $GOROOT/bin:$PATH
-
-RUN yum install -y libvirt libvirt-daemon &&\
-    rm -rf /usr/share/qemu &&\
-    ln -s /usr/share/qemu-kvm /usr/share/qemu &&\
-    wget --no-check-certificate -nv http://hypercontainer-install.s3.amazonaws.com/qemu-hyper-2.4.1-2.el7.centos.x86_64.rpm -O /tmp/qemu-hyper-2.4.1-2.el7.centos.x86_64.rpm &&\
-    wget --no-check-certificate -nv http://hypercontainer-install.s3.amazonaws.com/hyperstart-0.6-1.el7.centos.x86_64.rpm -O /tmp/hyperstart-0.6-1.el7.centos.x86_64.rpm &&\
-    wget --no-check-certificate -nv http://hypercontainer-install.s3.amazonaws.com/hyper-container-0.6-1.el7.centos.x86_64.rpm -O /tmp/hyper-container-0.6-1.el7.centos.x86_64.rpm &&\
-    yum install -y /tmp/*.rpm &&\
-    rm -f /tmp/*.rpm
 
 RUN cd /gopath/src/github.com/hyperhq/hyperstart &&\
     ./autogen.sh &&\
